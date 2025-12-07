@@ -1,7 +1,7 @@
 import json
 
 import pytest
-
+from common.methods import genz
 from common.assertions import equal_json_strings
 from common.methods import anonymize, anonymizers, deanonymize
 
@@ -404,7 +404,7 @@ def test_overlapping_keep_both():
 
 
 @pytest.mark.api
-def test_given_anonymize_called_with_genz_then_expected_valid_response_returned(api_client):
+def test_given_anonymize_called_with_genz_then_expected_valid_response_returned():
     payload = {
         "text": "Please contact Emily Carter at 734-555-9284 if you have questions about the workshop registration.",
         "analyzer_results": [
@@ -423,7 +423,7 @@ def test_given_anonymize_called_with_genz_then_expected_valid_response_returned(
         ]
     }
 
-    response = api_client.post("/genz", json=payload)
+    status, _ = genz(payload)
 
     # Only checking status code because GenZ operator output is random
-    assert response.status_code == 200
+    assert status == 200

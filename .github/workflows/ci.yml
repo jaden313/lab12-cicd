@@ -135,16 +135,13 @@ jobs:
           source env/bin/activate
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install ../presidio-anonymizer
-
-      - name: Wait for services to be ready
-        run: sleep 60
+          pip install $(pwd)/../presidio-anonymizer
 
       - name: Run E2E tests
         working-directory: e2e-tests
         run: |
           source env/bin/activate
-          pytest tests --disable-warnings -q
+          pytest -vv --tb=short
 
       - name: Stop Docker containers
         if: always()

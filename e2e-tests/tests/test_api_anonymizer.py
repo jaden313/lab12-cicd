@@ -423,7 +423,7 @@ def test_given_anonymize_called_with_genz_then_expected_valid_response_returned(
         ]
     }
 
-    status, _ = genz(payload)
+    request_body = json.dumps(payload)
+    status, _ = genz(request_body)
 
-    # Only checking status code because GenZ operator output is random
     assert status == 200

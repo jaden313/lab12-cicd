@@ -49,10 +49,10 @@ def __get_multipart_form_data(file):
         }
     return multipart_form_data
 
-def genz(payload):
+def genz(data):
     response = requests.post(
         f"{ANONYMIZER_BASE_URL}/genz",
-        json=payload,
+        data=data,
         headers=DEFAULT_HEADERS
     )
     return response.status_code, response.content
